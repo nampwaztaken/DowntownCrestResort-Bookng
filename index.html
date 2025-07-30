@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BlueWave Booking</title>
+
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
+  <!-- Custom CSS from jsDelivr CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/nampwaztaken/DowntownCrestResort-Bookng@main/style.css" />
+</head>
+<body>
+  <div class="booking-container" role="main" aria-label="Booking and Payment form">
+
+    <!-- Left side: Payment details -->
+    <div class="left-pane">
+      <h2>Payment Details</h2>
+      <form id="paymentForm" novalidate>
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" autocomplete="name" required />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" autocomplete="email" required />
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" required />
+
+        <label for="postal">Postal Code</label>
+        <input type="text" id="postal" name="postal" required />
+
+        <label for="address">Street Address</label>
+        <input type="text" id="address" name="address" autocomplete="street-address" required />
+
+        <label for="cardNumber">Credit Card Number</label>
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" autocomplete="cc-number" required />
+
+        <label for="expiryDate">Expiry Date</label>
+        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" autocomplete="cc-exp" required />
+
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" placeholder="123" autocomplete="cc‑csc" required />
+
+        <button type="submit" class="checkout-btn">Checkout</button>
+      </form>
+    </div>
+
+    <!-- Right side: Booking info -->
+    <div class="right-pane">
+      <h2>Room Info</h2>
+
+      <label for="roomType">Room Type</label>
+      <select id="roomType" name="roomType" required aria-required="true">
+        <option value="Standard">Standard Room - $100</option>
+        <option value="Superior">Superior Suite - $150</option>
+        <option value="Deluxe">Deluxe Suite - $200</option>
+        <option value="Grand">Grand Oceanview Retreat - $300</option>
+        <option value="Presidential">Presidential Sky Penthouse - $500</option>
+      </select>
+
+      <img src="https://ik.imagekit.io/dt3xs8pb5/1_X1K4Zi_mTg94imnWW-zfUw.jpg?updatedAt=1753878793851" alt="Room preview" class="room-image" id="roomImage" />
+
+      <p id="roomDescription">A cozy, well-appointed space perfect for solo travellers or short stays, offering comfort without compromise.</p>
+
+      <h3>Features & Amenities:</h3>
+      <ul class="amenities" id="amenitiesList">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10h-1V7a2 2 0..."/></svg>Queen-sized bed with luxury linens</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3a7 7..."/></svg>Ensuite bathroom with rain shower</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 17H3V5..."/></svg>Smart TV</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a2 2..."/></svg>Complimentary high-speed Wi-Fi</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v2..."/></svg>Writing desk and armchair</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v2..."/></svg>Mini-fridge, electric kettle, and coffee set</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v2..."/></svg>Daily housekeeping</li>
+      </ul>
+
+      <label for="roomCount">Number of Rooms</label>
+      <input type="number" id="roomCount" name="roomCount" value="1" min="1" required />
+
+      <label for="dateRange">Select Dates</label>
+      <input id="dateRange" name="dateRange" placeholder="Select check-in and check-out" readonly required />
+
+      <input type="hidden" id="checkIn" name="checkIn" />
+      <input type="hidden" id="checkOut" name="checkOut" />
+
+      <div id="price-summary" aria-live="polite" aria-atomic="true">Total: $100</div>
+    </div>
+  </div>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <!-- Your Custom JS from jsDelivr CDN -->
+  <script src="https://cdn.jsdelivr.net/gh/nampwaztaken/DowntownCrestResort-Bookng@main/script.js"></script>
+</body>
+</html>
