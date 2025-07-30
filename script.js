@@ -1,30 +1,34 @@
+// --- Room data ---
+// You can freely edit this section to add/change rooms!
 const rooms = {
   Standard: {
     price: 100,
-    image: "https://ik.imagekit.io/dt3xs8pb5/1_X1K4Zi_mTg94imnWW-zfUw.jpg?updatedAt=1753878793851",
-    description: "A cozy, well-appointed space perfect for solo travellers or short stays, offering comfort without compromise."
+    image: "https://ik.imagekit.io/dt3xs8pb5/1_X1K4Zi_mTg94imnWW-zfUw.jpg",
+    description: "A cozy space perfect for solo travellers or short stays."
   },
   Superior: {
     price: 150,
-    image: "https://ik.imagekit.io/dt3xs8pb5/bed-superior-deluxe-ocean-view-beach-palace_ab07beda98.jpg?updatedAt=1753878793941",
-    description: "The Superior Suite features extra space and comfort with scenic views."
+    image: "https://ik.imagekit.io/dt3xs8pb5/bed-superior-deluxe-ocean-view-beach-palace_ab07beda98.jpg",
+    description: "Extra space and comfort with scenic views."
   },
   Deluxe: {
     price: 200,
-    image: "https://ik.imagekit.io/dt3xs8pb5/Deluxe-King-Ocean-View-1.jpg?updatedAt=1753878793900",
-    description: "Deluxe Suite offers luxurious design and partial ocean views."
+    image: "https://ik.imagekit.io/dt3xs8pb5/Deluxe-King-Ocean-View-1.jpg",
+    description: "Luxurious design and partial ocean views."
   },
   Grand: {
     price: 300,
-    image: "https://ik.imagekit.io/dt3xs8pb5/The+Retreat_Ocean+Retreat+Suits_366.jpg?updatedAt=1753878793846",
-    description: "Enjoy a Grand Oceanview Retreat with panoramic sea scenery and elegance."
+    image: "https://ik.imagekit.io/dt3xs8pb5/The+Retreat_Ocean+Retreat+Suits_366.jpg",
+    description: "Grand Oceanview Retreat with panoramic sea scenery."
   },
   Presidential: {
     price: 500,
-    image: "https://ik.imagekit.io/dt3xs8pb5/photo-sky-high-deluxe-presidential-penthouse-melbourne-8.jpeg?updatedAt=1753878793804",
-    description: "The Presidential Sky Penthouse offers unmatched luxury with skyline views."
+    image: "https://ik.imagekit.io/dt3xs8pb5/photo-sky-high-deluxe-presidential-penthouse-melbourne-8.jpeg",
+    description: "Unmatched luxury with skyline views."
   }
 };
+
+/* ==== DO NOT CHANGE BELOW THIS LINE ==== */
 
 const roomType = document.getElementById('roomType');
 const roomImage = document.getElementById('roomImage');
@@ -36,31 +40,34 @@ const checkInInput = document.getElementById('checkIn');
 const checkOutInput = document.getElementById('checkOut');
 const paymentForm = document.getElementById('paymentForm');
 
-function calculateNights(startDate, endDate) {
-  if (!startDate || !endDate) return 0;
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  return Math.round((end - start) / (1000 * 60 * 60 * 24));
+function calculateNights(start, end) {
+  if (!start || !end) return 0;
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+  return Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
 }
 
 function updatePrice() {
-  const selectedType = roomType.value;
-  const count = parseInt(roomCount.value) || 1;
+  const type = roomType.value;
+  const count = Math.max(1, parseInt(roomCount.value) || 1);
   const nights = calculateNights(checkInInput.value, checkOutInput.value);
+
   if (nights <= 0) {
-    priceSummary.textContent = `Total: $0\n(Please select valid check-in and check-out dates)`;
+    priceSummary.textContent = "Total: $0 (Select valid dates)";
     return;
   }
-  const pricePerNight = rooms[selectedType].price;
+
+  const pricePerNight = rooms[type].price;
   const total = pricePerNight * count * nights;
-  priceSummary.textContent = `Total: $${total}\n(${count} room${count > 1 ? 's' : ''} × ${nights} night${nights > 1 ? 's' : ''} @ $${pricePerNight}/night)`;
+
+  priceSummary.textContent = `Total: $${total} (${count} room${count > 1 ? "s" : ""} × ${nights} night${nights > 1 ? "s" : ""} @ $${pricePerNight}/night)`;
 }
 
 function updateRoomDetails() {
-  const selected = rooms[roomType.value];
-  roomImage.src = selected.image;
+  const room = rooms[roomType.value];
+  roomImage.src = room.image;
   roomImage.alt = `${roomType.value} Room Preview`;
-  roomDescription.textContent = selected.description;
+  roomDescription.textContent = room.description;
   updatePrice();
 }
 
@@ -77,12 +84,13 @@ flatpickr(dateRangeInput, {
     } else {
       checkInInput.value = "";
       checkOutInput.value = "";
-      priceSummary.textContent = "Total: $0\n(Please select check-in and check-out dates)";
+      priceSummary.textContent = "Total: $0 (Select check-in and check-out dates)";
     }
   }
 });
 
 roomType.addEventListener('change', updateRoomDetails);
+
 roomCount.addEventListener('input', () => {
   if (roomCount.value < 1) roomCount.value = 1;
   updatePrice();
@@ -94,6 +102,7 @@ paymentForm.addEventListener('submit', e => {
     paymentForm.reportValidity();
     return;
   }
+
   const nights = calculateNights(checkInInput.value, checkOutInput.value);
   if (nights <= 0) {
     e.preventDefault();
@@ -101,14 +110,16 @@ paymentForm.addEventListener('submit', e => {
     dateRangeInput.focus();
     return;
   }
+
   if (parseInt(roomCount.value) < 1) {
     e.preventDefault();
     alert("Please enter a valid number of rooms.");
     roomCount.focus();
     return;
   }
-  e.preventDefault(); // For demo purposes
-  window.location.href = "https://www.google.com";
+
+  e.preventDefault(); // remove this to enable real submission
+  window.location.href = "https://www.google.com"; // demo redirect
 });
 
 updateRoomDetails();
