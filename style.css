@@ -15,20 +15,21 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-color);
   color: #333;
+  margin: 0;
   padding: 2rem 0;
-  display: flex;
-  justify-content: center;
+  overflow-x: hidden; /* prevent horizontal scroll */
 }
 
 .booking-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 90%;
+  margin: 0 auto; /* center horizontally */
   max-width: 1200px;
+  width: 90%;
   background-color: white;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .left-pane, .right-pane {
@@ -75,9 +76,17 @@ input[readonly] {
   font-weight: 600;
   font-size: 1.2rem;
   color: var(--primary-color);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
   padding: 1.25rem 1.5rem 0 1.5rem;
-  min-height: 160px;
+  user-select: none;
   white-space: pre-line;
+  min-height: 160px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  position: relative;
 }
 
 #price-summary::before {
@@ -86,6 +95,7 @@ input[readonly] {
   width: 60%;
   margin: 0 auto 1rem auto;
   border-top: 1.5px solid var(--divider-color);
+  border-radius: 2px;
 }
 
 .checkout-btn {
@@ -111,13 +121,15 @@ input[readonly] {
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
+  user-select: none;
 }
 
 #roomDescription {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem; /* space between description and amenities */
   white-space: pre-line;
 }
 
+/* Amenities List */
 .amenities {
   list-style: none;
   padding-left: 0;
@@ -137,12 +149,15 @@ input[readonly] {
   height: 18px;
   margin-right: 10px;
   fill: var(--primary-color);
+  flex-shrink: 0;
 }
 
+/* Flatpickr customization */
 .flatpickr-calendar {
-  font-family: inherit;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 8px;
   border-color: var(--primary-color);
+  font-size: 1rem;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
